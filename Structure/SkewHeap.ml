@@ -12,7 +12,7 @@ let new_skew_heap cmp =
       (Empty, _) -> t2
     | (_, Empty) -> t1
     | (Node (x1, l1, r1), Node (x2, l2, r2))
-      -> if cmp x1 x2
+      -> if cmp x1 x2 < 0
          then Node (x1, (union t2 r1), l1)
          else Node (x2, (union t1 r2), l2) in
   let this () =
