@@ -1,25 +1,27 @@
-type 'a skew_data =
-  | Empty
-  | Node of 'a * 'a skew_data * 'a skew_data
-
-type 'a skew_heap =
-  { insert : 'a -> unit; is_empty : unit -> bool; extract_min : unit -> 'a }
-
-let new_skew_heap cmp =
-  let heap = ref Empty in
-  let singleton x = Node (x, Empty, Empty) in
-  let rec union t1 t2 = match (t1, t2) with
-      (Empty, _) -> t2
-    | (_, Empty) -> t1
-    | (Node (x1, l1, r1), Node (x2, l2, r2))
-      -> if cmp x1 x2 < 0
-         then Node (x1, (union t2 r1), l1)
-         else Node (x2, (union t1 r2), l2) in
-  let this () =
-    { insert = (fun x -> heap := union (singleton x) !heap);
-      is_empty = (fun () -> match !heap with Empty -> true | _ -> false);
-      extract_min = (fun () -> match !heap with
-                                 Empty -> raise (Error "Heap Empty")
-                               | Node (x, l, r) -> heap := union l r; x) } in
-  this ()
+(* Priority Queue *)
+module Priority_Queue =
+  struct
+    type 'a data =
+      | Empty
+      | Node of 'a * 'a data * 'a data
+    let init = Empty
+    let singleton x = Node (x, Empty, Empty)
+    let rec union t1 t2 = match (t1, t2) with
+        (Empty, _) -> t2
+      | (_, Empty) -> t1
+      | (Node (x1, l1, r1), Node (x2, l2, r2))
+        -> if x1 < x2
+           then Node (x1, (union t2 r1), l1)
+           else Node (x2, (union t1 r2), l2)
+    let insert x h = union (singleton x) h
+    let is_empty h = (h == Empty)
+    let extract_min = function
+        Empty -> err "Heap Empty"
+      | Node (x, l, r) -> (x, union l r)
+    let rec list_of = function
+        Empty -> []
+      | Node (x, l, r) -> x :: list_of l @ list_of r
+  end
 ;;
+
+module PQ = Priority_Queue
