@@ -1,5 +1,5 @@
 (* Priority Queue *)
-module Priority_Queue =
+module PriorityQueue =
   struct
     type 'a data =
       | Empty
@@ -24,4 +24,4 @@ module Priority_Queue =
   end
 ;;
 
-module PQ = Priority_Queue
+module PQ = PriorityQueue
