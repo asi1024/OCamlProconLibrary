@@ -1,28 +1,3 @@
-(* Segment Tree *)
-module SegmentTree =
-  struct
-    type 'a segment_tree = int * 'a array * 'a * ('a -> 'a -> 'a)
-    let make n id f = ((1 lsl n, A.make (1 lsl (n + 1)) id, id, f) : 'a segment_tree)
-    let update ((n, ar, id, f) : 'a segment_tree) p v =
-      let rec upd p v =
-        ar.(p) <- v;
-        if p < 2*n-1 then
-          let num = if p mod 2 == 0 then f ar.(p) ar.(p+1) else f ar.(p-1) ar.(p) in
-          upd (p/2+n) num in
-      upd p v
-    let query ((n, ar, id, f) : 'a segment_tree) l r =
-      let rec sub v la ra =
-        if ra <= l || r <= la then id
-        else if l <= la && ra <= r then ar.(v)
-        else let nv, mid = (v - n) * 2, (la + ra) / 2 in
-             f (sub nv la mid) (sub (nv+1) mid ra) in
-      sub (2*n-2) 0 n
-  end
-;;
-
-module ST = SegmentTree
-
-
 (* Persistent Segment Tree *)
 module SegmentTree =
   struct
