@@ -3,7 +3,7 @@
 DIR=`dirname $0`
 SRC=$DIR/../../Graph/Dijkstra.ml
 DEP1=$DIR/../../Structure/SkewHeap.ml
-TEST=$DIR/Dijkstra.ml
+TEST=$DIR/main.ml
 TEMP=$DIR/../../Template.ml
 
 SPEC=`echo $TEST | sed -e s/".ml"/"Spec.ml"/g`

@@ -2,7 +2,7 @@
 
 DIR=`dirname $0`
 SRC=$DIR/../../Graph/Scc.ml
-TEST=$DIR/Scc.ml
+TEST=$DIR/main.ml
 TEMP=$DIR/../../Template.ml
 
 SPEC=`echo $TEST | sed -e s/".ml"/"Spec.ml"/g`

@@ -2,7 +2,7 @@
 
 DIR=`dirname $0`
 SRC=$DIR/../../Structure/SegmentTree.ml
-TEST=$DIR/SegmentTree.ml
+TEST=$DIR/main.ml
 TEMP=$DIR/../../Template.ml
 
 SPEC=`echo $TEST | sed -e s/".ml"/"Spec.ml"/g`
