@@ -1,7 +1,7 @@
 #!/bin/sh
 
 DIR=`dirname $0`
-SRC=$DIR/../../Graph/SPFA.ml
+SRC=$DIR/../../Graph/BipartiteMatching.ml
 TEST=$DIR/main.ml
 TEMP=$DIR/../../Template.ml
 
