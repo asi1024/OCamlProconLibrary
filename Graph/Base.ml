@@ -11,4 +11,4 @@ let cost ((_, _, c) : 'a edge_t) = c
 let make_graph v = (A.make v [] : 'a graph_t)
 
 let add_edge (g : 'a graph_t) (e : 'a edge_t) =
-  let s = src e in A.set g s (e :: A.get g s);;
+  let s = src e in A.set g s (e :: A.get g s)
