@@ -22,8 +22,3 @@ let err s = raise (Failure s)
 
 let inf = 1000000000
 let eps = 1e-11
-
-let _ =
-  let (n, m) = sf "%d %d\n" id2 in
-  pf "%d\n" @@ n + m
-;;

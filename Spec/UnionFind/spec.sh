@@ -1,9 +1,15 @@
 #!/bin/sh
 
 DIR=`dirname $0`
-SRC=$DIR/UnionFind.ml
+SRC=$DIR/../../Structure/UnionFind.ml
+TEST=$DIR/UnionFind.ml
+TEMP=$DIR/../../Template.ml
 
-ocamlopt $SRC -o a.out
+SPEC=`echo $TEST | sed -e s/".ml"/"Spec.ml"/g`
+
+cat $TEMP $SRC $TEST > $SPEC
+
+ocamlopt $SPEC -o a.out
 
 CASE=0
 CORRECT=0
@@ -26,4 +32,4 @@ done
 
 echo "$CORRECT/$CASE cases passed."
 
-rm a.out $DIR/*.cmi $DIR/*.cmx $DIR/*.o
+rm a.out $DIR/*.cmi $DIR/*.cmx $DIR/*.o $SPEC
